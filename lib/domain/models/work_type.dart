@@ -1,9 +1,9 @@
 enum WorkType {
-  translation,
+  origination,
   qc;
 
   String get title => switch (this) {
-        WorkType.translation => 'Translation',
+        WorkType.origination => 'Origination',
         WorkType.qc => 'QC',
       };
 }

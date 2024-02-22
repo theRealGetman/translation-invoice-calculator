@@ -106,7 +106,7 @@ class _HomeTableState extends State<HomeTable> {
                 onChanged: (WorkType? value) {
                   context
                       .read<HomeCubit>()
-                      .updateType(item.id, value ?? WorkType.translation);
+                      .updateType(item.id, value ?? WorkType.origination);
                 },
               ),
             ),
@@ -128,7 +128,7 @@ class _HomeTableState extends State<HomeTable> {
               ),
             ),
             DataCell(
-              Text('\$${item.price?.toStringAsFixed(2) ?? 0}'),
+              SelectableText('\$${item.price?.toStringAsFixed(2) ?? 0}'),
             ),
             DataCell(
               Row(
@@ -157,7 +157,7 @@ class _HomeTableState extends State<HomeTable> {
           DataCell.empty,
           DataCell.empty,
           DataCell(
-            Text('Total: \$${totalPrice.toStringAsFixed(2)}'),
+            SelectableText('Total: \$${totalPrice.toStringAsFixed(2)}'),
           ),
           DataCell.empty,
         ],

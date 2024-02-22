@@ -7,7 +7,7 @@ class WorkItem extends Equatable {
     required this.id,
     this.title,
     this.duration,
-    this.type = WorkType.translation,
+    this.type = WorkType.origination,
     this.price,
   });
 
