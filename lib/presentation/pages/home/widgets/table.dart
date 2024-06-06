@@ -177,7 +177,7 @@ class _HomeTableState extends State<HomeTable> {
         ],
       );
 
-  void _showDeleteDialog(BuildContext context, WorkItem item) {
+  void _showDeleteDialog(BuildContext ctx, WorkItem item) {
     showDialog(
       context: context,
       builder: (context) {
@@ -196,8 +196,8 @@ class _HomeTableState extends State<HomeTable> {
             ),
             TextButton(
               onPressed: () {
+                ctx.read<HomeCubit>().deleteItem(item);
                 Navigator.of(context).pop();
-                context.read<HomeCubit>().deleteItem(item);
               },
               child: const Text(
                 'Delete',

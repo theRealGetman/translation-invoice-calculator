@@ -1,6 +1,6 @@
 part of 'home_cubit.dart';
 
-sealed class HomeState extends Equatable {
+sealed class HomeState {
   const HomeState({
     this.items = const [],
     this.totalPrice = 0,
@@ -8,9 +8,6 @@ sealed class HomeState extends Equatable {
 
   final List<WorkItem> items;
   final double totalPrice;
-
-  @override
-  List<Object> get props => [items, totalPrice];
 }
 
 final class HomeInitial extends HomeState {}
