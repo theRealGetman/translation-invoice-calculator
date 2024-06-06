@@ -2,10 +2,11 @@ name: invoice_calculator
 description: "Invoice calculator"
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+1
+version: 1.0.1+2
 
 environment:
-  sdk: '>=3.2.4 <4.0.0'
+  sdk: '>=3.4.0 <4.0.0'
+  flutter: '>=3.22.0'
 
 dependencies:
   flutter:
