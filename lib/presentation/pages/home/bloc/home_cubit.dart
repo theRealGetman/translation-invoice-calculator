@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:invoice_calculator/domain/domain.dart';
 import 'package:invoice_calculator/domain/models/work_item.dart';
 import 'package:invoice_calculator/presentation/utils/rates.dart';
