@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:invoice_calculator/data/local_storage/work_item_storage.dart';
 import 'package:invoice_calculator/domain/domain.dart';
 import 'package:invoice_calculator/domain/models/work_item.dart';
 import 'package:invoice_calculator/presentation/utils/rates.dart';
@@ -6,12 +7,30 @@ import 'package:invoice_calculator/presentation/utils/rates.dart';
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(HomeInitial());
+  HomeCubit(this._storage) : super(HomeInitial());
+
+  final WorkItemStorage _storage;
 
   List<WorkItem> _items = [];
 
   double get _totalPrice {
-    return _items.fold(0, (previousValue, item) => previousValue + (item.price ?? 0));
+    return _items.fold(
+        0, (previousValue, item) => previousValue + (item.price ?? 0));
+  }
+
+  Future<void> onInit() async {
+    _items = await _storage.value;
+
+    if (_items.isEmpty) {
+      return addNewItem();
+    }
+
+    emit(
+      HomeUpdated(
+        items: _items,
+        totalPrice: _totalPrice,
+      ),
+    );
   }
 
   Future<void> addNewItem() async {
@@ -21,6 +40,7 @@ class HomeCubit extends Cubit<HomeState> {
       final id = _items.last.id + 1;
       _items = List.of(_items)..add(WorkItem(id: id));
     }
+    await _storage.save(_items);
     emit(
       HomeNewItem(
         items: _items,
@@ -31,6 +51,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> deleteItem(WorkItem item) async {
     _items.removeWhere((el) => el.id == item.id);
+    await _storage.save(_items);
     emit(
       HomeUpdated(
         items: _items,
@@ -57,6 +78,7 @@ class HomeCubit extends Cubit<HomeState> {
       return item.copyWith(price: price);
     }).toList();
 
+    await _storage.save(_items);
     emit(
       HomeUpdated(
         items: _items,

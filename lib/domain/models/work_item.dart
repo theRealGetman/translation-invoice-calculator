@@ -1,7 +1,12 @@
 import 'package:equatable/equatable.dart';
+
 import 'package:invoice_calculator/domain/models/work_type.dart';
 import 'package:invoice_calculator/presentation/utils/utils.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'work_item.g.dart';
+
+@JsonSerializable()
 class WorkItem extends Equatable {
   const WorkItem({
     required this.id,
@@ -10,6 +15,11 @@ class WorkItem extends Equatable {
     this.type = WorkType.origination,
     this.price,
   });
+
+  factory WorkItem.fromJson(Map<String, dynamic> json) =>
+      _$WorkItemFromJson(json);
+
+  Map<String, dynamic> toJson() => _$WorkItemToJson(this);
 
   final int id;
   final String? title;

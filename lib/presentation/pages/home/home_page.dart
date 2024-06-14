@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HomeCubit>(
-      create: (context) => HomeCubit()..addNewItem(),
+      create: (context) => HomeCubit(context.read())..onInit(),
       child: const HomePageContent(),
     );
   }
